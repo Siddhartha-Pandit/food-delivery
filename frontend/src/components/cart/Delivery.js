@@ -3,6 +3,7 @@ import { countries } from "countries-list";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { saveDeliveryInfo } from "../../actions/cartAction";
+import CheckoutSteps from "./CheckoutSteps"
 
 const Delivery = () => {
   const countriesList = Object.values(countries);
@@ -37,6 +38,7 @@ const Delivery = () => {
 
   return (
     <>
+    <CheckoutSteps delivery/>
       <div className="row wrapper">
         <div className="col-10 col-lg-5 cartt">
           <form onSubmit={submitHandler}>

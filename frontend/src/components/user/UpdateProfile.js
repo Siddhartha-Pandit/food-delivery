@@ -1,15 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
-import { updateProfile, loadUser, clearErrors } from "../../actions/userAction";
+import {
+  updateProfile,
+  loadUser,
+  clearErrors,
+} from "../../actions/userAction";
 import { UPDATE_PROFILE_RESET } from "../../constants/userConstant";
 import { useNavigate } from "react-router-dom";
 
 const UpdateProfile = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [avatar, setAvatar] = useState(null); // Use null for initial value
-  const [avatarPreview, setAvatarPreview] = useState("/images/profile.png");
+  const [avatar, setAvatar] = useState("");
+  const [avatarPreview, setAvatarPreview] = useState("/images/images.png");
 
   const alert = useAlert();
   const dispatch = useDispatch();
@@ -29,14 +33,16 @@ const UpdateProfile = () => {
       dispatch(clearErrors());
     }
     if (isUpdated) {
-      alert.success("User updated successfully");
+      alert.success("user updated successfully");
       dispatch(loadUser());
+
       navigate("/users/me");
+
       dispatch({
         type: UPDATE_PROFILE_RESET,
       });
     }
-  }, [dispatch, alert, error, navigate, isUpdated]);
+  }, [dispatch, alert, error, navigate, isUpdated,user]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -44,24 +50,22 @@ const UpdateProfile = () => {
     const formData = new FormData();
     formData.set("name", name);
     formData.set("email", email);
-    if (avatar) {
-      formData.append("avatar", avatar);
-    }
+    formData.set("avatar", avatar);
 
     dispatch(updateProfile(formData));
   };
 
   const onChange = (e) => {
-    const reader=new FileReader();
-      reader.onload = () => {
-        if (reader.readyState === 2) {
-          setAvatarPreview(reader.result);
-          setAvatar(reader.result)
-        }
-      };
-      reader.readAsDataURL(e.target.files[0]);
-    }
-  
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        setAvatarPreview(reader.result);
+        setAvatar(reader.result);
+      }
+    };
+    reader.readAsDataURL(e.target.files[0]);
+  };
 
   return (
     <>
@@ -72,7 +76,7 @@ const UpdateProfile = () => {
             onSubmit={submitHandler}
             encType="multipart/form-data"
           >
-            <h1 className="mb-2 mb-5">Update Profile</h1>
+            <h1 className="mt-2 mb-5">Update Profile</h1>
             <div className="form-group">
               <label htmlFor="name_field">Name</label>
               <input
@@ -82,7 +86,7 @@ const UpdateProfile = () => {
                 name="name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-              />
+              ></input>
             </div>
             <div className="form-group">
               <label htmlFor="email_field">Email</label>
@@ -93,7 +97,7 @@ const UpdateProfile = () => {
                 name="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-              />
+              ></input>
             </div>
 
             <div className="form-group">
@@ -114,15 +118,16 @@ const UpdateProfile = () => {
                     name="avatar"
                     className="custom-file-input"
                     id="customFile"
-                    accept="image/*"
+                    accept="images/*"
                     onChange={onChange}
-                  />
+                  ></input>
                   <label className="custom-file-label" htmlFor="customFile">
                     Choose Avatar
                   </label>
                 </div>
               </div>
             </div>
+
             <button
               type="submit"
               className="btn btn-block py-3"

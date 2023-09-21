@@ -8,10 +8,10 @@ body {
   overflow-x: hidden;
   background-image: linear-gradient(
       0deg,
-      rgba(250, 250, 250, 0.801),
-      rgba(250, 250, 250, 0.836)
+      rgba(250, 250, 250, 0.701),
+      rgba(250, 250, 250, 0.736)
     ),
-    url("../public/images/template.jpg");
+    url("../public/images/temp.jpeg");
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -41,7 +41,7 @@ body {
 }
 
 nav {
-  background-color: #be521f;
+  background-color:#7c8454;
   padding: 1rem 1rem;
   background-repeat: no-repeat;
   background-position: center;

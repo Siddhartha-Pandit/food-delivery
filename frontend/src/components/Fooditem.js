@@ -14,7 +14,7 @@ import{
 
 const Fooditem = ({ fooditem }) => {
 
-    const [quantity, setQuantity] = useState(1);
+    const [quantity, setQuantity] = useState(0);
 
     const [showButtons, setShowButtons] = useState(false);
 
