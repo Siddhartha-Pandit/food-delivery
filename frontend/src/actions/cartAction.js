@@ -5,7 +5,8 @@ import{
     UPDATE_CART_QUANTITY,
     CLEAR_CART,
     UPDATE_DELIVERY_INFO,
-    SAVE_DELIVERY_INFO
+    SAVE_DELIVERY_INFO,
+    SET_RESTAURANT_ID
 } from "../constants/cartConstant";
 
 export const addItemToCart = (id,quantity) =>async(dispatch,getState) => {
@@ -68,3 +69,10 @@ export const updateDeliveryInfo =(deliveryInfo)=>(dispatch)=>{
     }
     catch(error){}
 };
+
+export const setRestaurantId=(id)=>{
+    return{
+        typr:SET_RESTAURANT_ID,
+        payload:id,
+    }
+}
