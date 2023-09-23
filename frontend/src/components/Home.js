@@ -11,11 +11,13 @@ import Loader from "../components/Layout/Loader";
 import Message from '../components/Message';
 import { useDispatch, useSelector } from "react-redux";
 import CountRestaurant from './CountRestaurant';
+import { useParams } from 'react-router-dom';
 
 
 const Home = () => {
 
   const dispatch = useDispatch();
+  const {keyword} =useParams();
 
   const {
     loading: restaurantsLoading,
@@ -28,8 +30,8 @@ const Home = () => {
     if (restaurantsError) {
       return alert.error(restaurantsError);
     }
-    dispatch(getRestaurants());
-  }, [dispatch, restaurantsError]);
+    dispatch(getRestaurants(keyword));
+  }, [dispatch, restaurantsError,keyword]);
 
 
   const handleSortByRatings = () => {

@@ -10,10 +10,11 @@ import {ALL_RESTAURANTS_REQUEST,
         TOGGLE_VEG_ONLY
         } from "../constants/restaurantConstant";
         
-export const getRestaurants =() => async(dispatch) =>{
+export const getRestaurants =(keyword=" ") => async(dispatch) =>{
     try{
         dispatch({type:ALL_RESTAURANTS_REQUEST});
-        let link = "/api/v1/eats/stores"
+        // let link = "/api/v1/eats/stores"
+        let link=`/api/v1/eats/stores?keyword=${keyword}`;
         const {data} = await axios.get(link);
         const{restaurants, count} = data;
 
