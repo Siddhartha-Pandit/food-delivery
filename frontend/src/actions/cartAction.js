@@ -49,7 +49,7 @@ export const removeItemFromCart = (id) => async (dispatch, getState)=>{
     localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
 }
 
-export const clearcart = () => async (dispatch)=>{
+export const clearCart = () => async (dispatch)=>{
     dispatch( {type: CLEAR_CART} );
     localStorage.removeItem("cartItems");
 }
@@ -72,7 +72,7 @@ export const updateDeliveryInfo =(deliveryInfo)=>(dispatch)=>{
 
 export const setRestaurantId=(id)=>{
     return{
-        typr:SET_RESTAURANT_ID,
+        type:SET_RESTAURANT_ID,
         payload:id,
     }
 }

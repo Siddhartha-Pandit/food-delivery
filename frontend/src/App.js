@@ -1,4 +1,6 @@
 import './App.css';
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
 import Header from './components/Layout/Header';
 import Home from './components/Home';
 import Footer from './components/Layout/Footer';
@@ -17,6 +19,12 @@ import { loadUser } from './actions/userAction';
 import store from "./store";
 import ConfirmOrder from './components/cart/ConfirmOrder';
 import Payment from'./components/cart/Payment';
+import OrderSuccess from './components/cart/OrderSuccess';
+import ListOrders from './components/order/ListOrders';
+import OrderDetails from './components/order/OrderDetails';
+
+
+const stripePromise = loadStripe('pk_test_51NmV7CSGBfSmiQzDiffucRlHSloomUc1CgqLIz3iVqNVruFpCHD0jilJqeoV9v1uhw6HvjWL3th7sH0gvRAL3Hmt00gKic0iEl');
 
 function App() {
   useEffect( ()=> {
@@ -41,7 +49,14 @@ function App() {
             <Route path='/users/forgotPassword' element={<ForgotPassword />}  />
             <Route path='/users/resetPassword/:token' element={<NewPassword/>} exact />
             <Route path='/confirm' element={<ConfirmOrder/>} exact />
-            <Route path='/payment' element={<Payment/>} exact />
+            <Route path='/payment' element={
+              <Elements stripe={stripePromise}>
+                <Payment />
+              </Elements>
+            } exact />
+            <Route path='/success' element={<OrderSuccess/>} exact />
+            <Route path='/eats/orders/me/myOrders' element={<ListOrders/>} exact />
+            <Route path='/eats/orders/:id' element={<OrderDetails/>} exact />
 
           </Routes>
 
